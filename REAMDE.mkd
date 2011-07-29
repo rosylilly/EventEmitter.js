@@ -1,0 +1,17 @@
+# EventEmitter.js
+
+    var object = {};
+    EventEmitter.extends(object);
+
+    object.addEventListener("sampleEvent", function(e){
+      alert(e); // => "sampleEvent"
+    });
+    object.emit("sampleEvent");
+
+    function C(){};
+    C.prototype = new EventEmitter();
+    var cObject = new C();
+    cObject.addEventListener("sampleEvent", function(e, arg){
+      alert(arg) // => "Foo!!"
+    });
+    cObject.emit("sampleEvent", "Foo!!!");
