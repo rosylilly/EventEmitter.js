@@ -1,16 +1,19 @@
-if(exports != undefined)
-{
-  window = exports;
-}
-
 (function(window, undefined){
 
 function EventEmitter(){};
 
-EventEmitter.prototype.addEventListener = function(event, listener){
+eventToString = function(event)
+{
+  event = event.type || event;
+
+  return event.toString();
+};
+
+EventEmitter.prototype.addEventListener = function(event, listener)
+{
   if(!this._events) this._events = {};
 
-  var eventName = event.type || event.toString();
+  var eventName = eventToString(event);
   var listeners = this._events[eventName] || [];
 
   listeners.push(listener);
@@ -18,10 +21,11 @@ EventEmitter.prototype.addEventListener = function(event, listener){
   this._events[eventName] = listeners;
 };
 
-EventEmitter.prototype.removeEventListener = function(event, listener){
+EventEmitter.prototype.removeEventListener = function(event, listener)
+{
   if(!this._events) this._events = {};
 
-  var eventName = event.type || event.toString();
+  var eventName = eventToString(event);
   var listeners = this._events[eventName] || [];
 
   for(var i = (listeners.length - 1); i >= 0; i--)
@@ -35,10 +39,11 @@ EventEmitter.prototype.removeEventListener = function(event, listener){
   this._events[eventName] = listeners;
 };
 
-EventEmitter.prototype.emit = function(event){
+EventEmitter.prototype.emit = function(event)
+{
   if(!this._events) return false;
 
-  var eventName = event.type || event.toString();
+  var eventName = eventToString(event);
   var listeners = this._events[eventName] || [];
   var args = new Array(arguments.length);
 
