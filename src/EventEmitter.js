@@ -2,7 +2,7 @@
 
 function EventEmitter(){};
 
-eventToString = function(event)
+var eventToString = function(event)
 {
   event = event.type || event;
 
