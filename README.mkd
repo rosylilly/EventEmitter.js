@@ -8,6 +8,8 @@
     });
     object.emit("sampleEvent");
 
+
+
     function C(){};
     C.prototype = new EventEmitter();
     var cObject = new C();
